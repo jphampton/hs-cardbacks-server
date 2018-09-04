@@ -58,8 +58,17 @@ public class Cardback {
     public Cardback build() {
       return new Cardback(id, gamepediaName, mashapeName, imgURL, imgAnimatedURL, month, year);
     }
+  }
 
-
+  public Builder toBuilder() {
+    return new Builder()
+        .setId(id)
+        .setGamepediaName(gamepediaName)
+        .setMashapeName(mashapeName)
+        .setImgURL(imgURL)
+        .setImgAnimatedURL(imgAnimatedURL)
+        .setMonth(month)
+        .setYear(year);
   }
 
   public final int id;
@@ -69,6 +78,4 @@ public class Cardback {
   public final String imgAnimatedURL;
   public final Month month;
   public final int year;
-
-
 }
