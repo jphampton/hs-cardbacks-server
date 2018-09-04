@@ -8,6 +8,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.storage.CardbackDao;
+import com.models.Cardback;
+import com.models.Month;
+
 // [START example]
 @SuppressWarnings("serial")
 @WebServlet(name = "helloworld", value = "/")
@@ -17,6 +21,15 @@ public class CardbackServer extends HttpServlet {
   public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
     PrintWriter out = resp.getWriter();
     out.println("Hello Elsie");
+  }
+
+  public static String getCardback() {
+    CardbackDao cd = new CardbackDao();
+    cd.makeTestEntity();
+    Month thisMonth = Month.values()[8];
+    int thisYear = 2018;
+    Cardback vanCleef = cd.getMonthYear(thisMonth,thisYear);
+    return vanCleef.imgURL;
   }
 
   public static String getInfo() {

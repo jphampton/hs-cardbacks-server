@@ -25,7 +25,7 @@
 </head>
 <body>
 <h1>Hello App Engine -- Java 8!</h1>
-
+<p>This Month's image URL is: <%=CardbackServer.getCardback()%></p>
 <p>This is <%= CardbackServer.getInfo() %>.</p>
 <table>
     <tr>
