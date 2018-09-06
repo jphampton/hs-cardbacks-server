@@ -13,7 +13,12 @@
 -->
 <!-- [START config] -->
 <appengine-web-app xmlns="http://appengine.google.com/ns/1.0">
+    <application>hearthstonecardbacks-215221</application>
+    <version>1.0-SNAPSHOT</version>
     <runtime>java8</runtime>
     <threadsafe>true</threadsafe>
+    <env-variables>
+        <env-var name="ENDPOINTS_SERVICE_NAME" value="hearthstonecardbacks-215221.appspot.com" />
+    </env-variables>
 </appengine-web-app>
         <!-- [END config] -->
