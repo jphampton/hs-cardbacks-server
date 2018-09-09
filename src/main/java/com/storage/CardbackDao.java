@@ -16,7 +16,10 @@ import com.google.appengine.api.datastore.Query.FilterPredicate;
 import com.models.Month;
 import com.models.Cardback;
 
+import java.util.logging.Logger;
+
 public class CardbackDao {
+  private static final Logger log = Logger.getLogger(CardbackDao.class.getName());
   private DatastoreService datastore;
 
   public CardbackDao() {
@@ -32,6 +35,10 @@ public class CardbackDao {
   }
   public Cardback getMonthYear(Month month, int year) {
     Entity e = queryMonthYear(month, year);
+    if(e==null){
+      log.warning(String.format("No cardback found for %s %d", month, year));
+      return new Cardback.Builder().build();
+    }
     Key k = e.getKey();
     String name = k.getName();
     int id = Integer.parseInt(name);
@@ -54,14 +61,13 @@ public class CardbackDao {
   }
 
   private Entity queryMonthYear(Month month, int year) {
-    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     Filter monthEquals = new FilterPredicate(Constants.MONTH, FilterOperator.EQUAL, month.ordinal());
     Filter yearEquals = new FilterPredicate(Constants.YEAR, FilterOperator.EQUAL, year);
     CompositeFilter monthYearFilter = CompositeFilterOperator.and(monthEquals, yearEquals);
-
+    log.warning(String.format("Month and year: %d %d", month.ordinal(), year));
     Query q = new Query(Constants.CARDBACK_KIND).setFilter(monthYearFilter);
     PreparedQuery pq = datastore.prepare(q);
     return pq.asSingleEntity();
-
   }
+
 }

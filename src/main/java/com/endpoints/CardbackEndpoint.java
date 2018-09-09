@@ -15,6 +15,7 @@ import java.security.PrivateKey;
 import java.security.Signature;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.util.Base64;
+import java.util.logging.Logger;
 
 @Api(
     name = "cardback",
@@ -35,8 +36,11 @@ import java.util.Base64;
     }
 )
 public class CardbackEndpoint {
+  private static final Logger log = Logger.getLogger(CardbackEndpoint.class.getName());
+
   @ApiMethod(name = "current_cardback")
   public Cardback currentCardback(@Named("month") Month month, @Named("year") int year) throws Exception {
+    log.warning(String.format("Month and year currentCardback %d %d", month.ordinal(), year));
     CardbackDao cd = new CardbackDao();
     Cardback current = cd.getMonthYear(month, year);
     String rawUrl = current.imgURL;

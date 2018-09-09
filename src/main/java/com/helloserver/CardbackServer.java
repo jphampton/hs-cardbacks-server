@@ -26,8 +26,8 @@ public class CardbackServer extends HttpServlet {
   public static String getCardback() {
     CardbackDao cd = new CardbackDao();
     cd.makeTestEntity();
-    Month thisMonth = Month.values()[8];
-    int thisYear = 2018;
+    Month thisMonth = Month.values()[6];
+    int thisYear = 2016;
     Cardback vanCleef = cd.getMonthYear(thisMonth,thisYear);
     return vanCleef.imgURL;
   }
